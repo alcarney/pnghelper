@@ -23,3 +23,32 @@ PNGImage new_png_image()
     
     return img;
 }
+
+/*
+ * This function is for clearing up after an image struct has been finished with
+ * de allocating all the memory and restoring it to its inital state ready for reuse 
+ * or just as the program is closing
+ */
+void destroy_png_image(PNGImage* img)
+{
+    unsigned int i = 0;
+
+    for (i =0 ; i< img->height; i++)
+    {
+        free(img->row_pointers[i]);
+        img->row_pointers[i] = NULL;
+    }
+
+    free(img->row_pointers);
+    img->row_pointers = NULL;
+
+    img->width = 0;
+    img->height = 0;
+    img->color_type = 0;
+    img->bit_depth = 0;
+    img->number_of_passes = 0;
+
+    img->png_ptr = NULL;
+    img->info_ptr = NULL;
+
+}
