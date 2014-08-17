@@ -8,7 +8,7 @@
 #define PNG_READER_C
 
 #include <stdio.h>
-#include <stblib.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdbool.h>
