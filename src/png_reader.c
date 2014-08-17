@@ -20,7 +20,7 @@ bool read_png_from_file(PNGImage* img, char* filename)
     }
 
     // First things first lets see if we can open the file
-    FILE* png_f = fopen(filename, "wb");
+    FILE* png_f = fopen(filename, "rb");
 
     if(!png_f)
     {
