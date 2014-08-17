@@ -6,6 +6,8 @@
 #ifndef PNG_DATA_C
 #define PNG_DATA_C
 
+#include <stdlib.h>
+#include <stdbool.h>
 #include <png.h>
 
 #define PNG_DEBUG 3
@@ -20,7 +22,7 @@
 
 typedef struct pngimg
 {
-    unsigned int with;
+    unsigned int width;
     unsigned int height;
     png_byte color_type;
     png_byte bit_depth;
@@ -30,11 +32,12 @@ typedef struct pngimg
 
     // Not sure what this does but I think it may be something to do with interlacing
     int number_of_passes;
-    png_bytep row_pointers;
+    png_bytep* row_pointers;
 } PNGImage;
 
 // Function Prototypes
 PNGImage new_png_image();
+bool is_empty_img_struct(PNGImage* img);
 void destroy_png_image(PNGImage* img);
 
 #endif

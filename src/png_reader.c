@@ -1,24 +1,8 @@
 #include "png_reader.h"
 
 // Static function prototypes
-static bool is_empty_img_struct(PNGImage* img);
+bool is_empty_img_struct(PNGImage* img);
 
-/*
- * Checks an image to see if it is in fact empty
- */
-static bool is_empty_img_struct(PNGImage* img)
-{
-    // Baiscally check every field, if it isn't NULL 
-    // for pointers or 0 for the numeric fields then return false
-    if (img->png_ptr != NULL || img->info_ptr != NULL || img->row_pointers != NULL)
-        return false;
-
-    if (img->height != 0 || img->width != 0 || img->bit_depth != 0 || img->color_type != 0)
-        return false;
-
-    // If we get this far then indeed we have an empty image struct so return true
-    return true;
-}
 
 /*
  * This function reads in a png image from the filename given
