@@ -38,6 +38,7 @@ typedef struct pngimg
 // Function Prototypes
 PNGImage new_png_image();
 bool is_empty_img_struct(PNGImage* img);
+bool is_img_writeable(PNGImage* img);
 void destroy_png_image(PNGImage* img);
 
 #endif
