@@ -34,7 +34,7 @@ bool read_png_from_file(PNGImage* img, char* filename)
     // is a function that will do this for us
     
     // Let's read those first 8 bytes then
-    char header[8];
+    unsigned char header[8];
     fread(header, 1, 8, png_f);
 
     // Now lets call that handy function then
@@ -65,7 +65,7 @@ bool read_png_from_file(PNGImage* img, char* filename)
     }
 
     // Tell libpng what we'd like it to run if it encounters an error during the next step
-    if(setjmp(png_jmpbuf(info->png_ptr)))
+    if(setjmp(png_jmpbuf(img->png_ptr)))
     {
         fprintf(stderr, "[png_reader]: ERROR: Problems while initialising IO\n");
         fclose(png_f);
@@ -76,7 +76,7 @@ bool read_png_from_file(PNGImage* img, char* filename)
     png_init_io(img->png_ptr, png_f);
 
     // Tell libpng how many bytes we read in while checking the header
-    png_set_sig_bytes(info_png_ptr, 8);
+    png_set_sig_bytes(img->png_ptr, 8);
 
     // Next we need to get some info about the image we are going to read in
     png_read_info(img->png_ptr, img->info_ptr);
@@ -94,7 +94,7 @@ bool read_png_from_file(PNGImage* img, char* filename)
 
     // Last bit of housekeeping before we read the image into memory, we need
     // to tell libpng what we'd like to run on our end in case of an error
-    if(setjmp(png_jmpbuf(info->png_ptr)))
+    if(setjmp(png_jmpbuf(img->png_ptr)))
     {
         fprintf(stderr, "[png_reader]: ERROR: Unable to read file %s\n", filename);
         fclose(png_f);
@@ -127,7 +127,7 @@ bool read_png_from_file(PNGImage* img, char* filename)
 
     unsigned int row = 0;
 
-    for(row = 0; row < img->height : row++)
+    for(row = 0; row < img->height ; row++)
     {
         img->row_pointers[row] = (png_byte*) malloc(png_get_rowbytes(img->png_ptr, img->info_ptr));
 

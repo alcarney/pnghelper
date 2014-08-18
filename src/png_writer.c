@@ -9,16 +9,16 @@ bool write_png_to_file(PNGImage* img, char* filename)
     // First let's check to see if we have been given something we can write
     // Eventually I probably come up with a better validity check than simply 
     // all fields being non zero, but it should suffice for now
-    if(!is_img_writeable(img))
+/*    if(!is_img_writeable(img))
     {
         fprintf(stderr, "[png_writer]: ERROR: Empty PNGImage struct given - there is nothing to write!\n");
         return false;
-    }
+    }*/
 
     // Now let's see if we are able to open this file for writing
     FILE* png_f = fopen(filename, "wb");
 
-    if(png_f)
+    if(!png_f)
     {
         fprintf(stderr, "[png_writer]: ERROR: Unable to open file %s for writing\n", filename);
         return false;
