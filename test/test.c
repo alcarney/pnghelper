@@ -32,13 +32,15 @@ bool process_file(PNGImage* img)
         for(j = 0; j < img->width ; j++)
         {
             png_byte* pixel = &(row[j*4]);
-            printf("Pixel at [%d,%d] has RGBA values: %d, %d, %d, %d\n", i, j,
+            printf("Pixel at [%d,%d] has RGBA values: %d, %d, %d, %d\r", i, j,
                     pixel[0], pixel[1], pixel[2], pixel[3]);
 
             pixel[0] = 0;
             pixel[1] = pixel[2];
         }
     }
+
+    puts("\n");
 
     return true;
 }

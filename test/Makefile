@@ -14,4 +14,4 @@ png_reader.o:
 	gcc -c $(WARN) ../src/png_reader.c -o ../src/png_reader.o
 
 clean:
-	cd ../src ; rm *,o
+	cd ../src ; rm *.o
