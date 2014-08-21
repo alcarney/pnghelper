@@ -4,7 +4,7 @@ void png_pixel_iterate(PNGImage* img, PixelIterator iter)
 {
     // We need a check to confirm if we have a valid image
     // If we don't then just print a warning message that nothing was done
-    if (is_img_writable(img))
+    if (is_img_writeable(img))
     {
         // We use these to index the pixel coordintates in the image
         unsigned int x = 0;
