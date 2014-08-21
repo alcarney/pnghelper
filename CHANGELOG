@@ -1,0 +1,6 @@
+# v0.5
+
++ Ability to load images from a file
++ Ability to save images to a file
++ Ability to pass a function to an iterator which woulditerate over all the pixels 
+  in the image and apply that function to them
