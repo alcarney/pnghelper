@@ -13,7 +13,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "png_data.h"
+#include "../png_data.h"
 
 // Function Prototypes
 bool read_png_from_file(PNGImage* img, char* filename);

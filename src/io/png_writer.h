@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "png_data.h"
+#include "../png_data.h"
 
 // Function Prototypes
 bool write_png_to_file(PNGImage* img, char* filename);
