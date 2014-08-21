@@ -77,10 +77,10 @@ bool is_img_writeable(PNGImage* img)
 {
     // Baiscally check every field, if it isn't NULL 
     // for pointers or 0 for the numeric fields then return false
-    if (img->row_pointers != NULL)
+    if (img->row_pointers == NULL)
         return false;
 
-    if (img->height != 0 || img->width != 0 || img->bit_depth != 0 || img->color_type != 0)
+    if (img->height == 0 || img->width == 0 || img->bit_depth == 0 || img->color_type == 0)
         return false;
 
     // If we get this far then indeed we have an empty image struct so return true
