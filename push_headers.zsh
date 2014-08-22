@@ -2,12 +2,14 @@
 
 
 # Little function to move the header files 
-move_headers(files) 
+move_headers() 
 {
-	for f in $1
+	for f in $(ls)
 	do 
-		# Only move if they are valid files, otherwise fail silently
-		if [[-f $f]]; then 
+		#echo $f
+
+		# Only move if they are valid files ending in .h, otherwise fail silently
+		if [[ -f $f && $f == *.h ]]; then 
 			echo "\tMoving $f" 
 			cp $f ~/.myheaders/pnghelper/
 		fi
@@ -18,24 +20,16 @@ move_headers(files)
 echo "Entering dir src/"
 cd src
 
-# Get a list of subdirs
-sub_dirs=$(ls -d */)
-
-#echo $sub_dirs
-
 # Now lets move the headers in the src dir first
-move_headers($(ls *.h))
+move_headers
 
-# Now loop through each sub directory
-for d in $sub_dirs
+# Now loop through each sub directory and do the same
+for d in $(ls -d */)
 do
 	echo "Entering dir $d"
 	cd $d
-
-	move_headers($(ls *.h))
-
+	move_headers
 	cd ..
-
 done 
 
 # Go back to where we started
