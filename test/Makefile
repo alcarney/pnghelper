@@ -1,4 +1,6 @@
 WARN= -Wall -Wextra -Werror
+HEADERS= -I ~/.myheaders
+LIBS= -L ~/.mylibs
 .PHONY: clean
 
 # Object files sorted by dir
@@ -11,6 +13,9 @@ test: $(DATA_OBJ) $(IO_OBJ)
 
 test_pixel_iterator: $(DATA_OBJ) $(IO_OBJ) $(UTIL_OBJ)
 	gcc $(WARN) $(DATA_OBJ) $(IO_OBJ) $(UTIL_OBJ) test_pixel_iterator.c -o test_pixel_iterator -lpng
+
+test_lib: 
+	gcc $(WARN) $(HEADERS) $(LIBS) test_lib.c -o test_lib -lpng -lpnghelper
 
 png_data.o: 
 	gcc -c $(WARN) ../src/png_data.c -o ../src/png_data.o
