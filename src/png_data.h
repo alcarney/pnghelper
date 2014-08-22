@@ -12,6 +12,11 @@
 
 #define PNG_DEBUG 3
 
+// Let's define some aliases for png colour types so we don't have to type as much
+#define GRAYSCALE PNG_COLOR_TYPE_GRAY
+#define RGB PNG_COLOR_TYPE_RGB
+#define RGBA PNG_COLOR_TYPE_RGB_ALPHA
+
 /*
  *             Things that may be good for future reference:
  *
@@ -39,10 +44,11 @@ typedef struct imgparams
 {
     unsigned int width;
     unsigned int height;
+    png_byte color_type;
 } IMGParams;
 
 // Function Prototypes
-PNGImage new_png_image(IMGParams* params);
+bool new_png_image(PNGImage* img, IMGParams* params);
 bool is_empty_img_struct(PNGImage* img);
 bool is_img_writeable(PNGImage* img);
 void destroy_png_image(PNGImage* img);
