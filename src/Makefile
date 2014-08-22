@@ -8,7 +8,7 @@ IO_OBJ=io/png_reader.o io/png_writer.o
 UTIL_OBJ=util/pixel_iterator.o
 
 library: $(DATA_OBJ) $(IO_OBJ) $(UTIL_OBJ)
-	gcc -fPIC $(WARN) $(DATA_OBJ) $(IO_OBJ) $(UTIL_OBJ) -o libpnghelper.so -lpng
+	gcc -shared $(WARN) $(DATA_OBJ) $(IO_OBJ) $(UTIL_OBJ) -o libpnghelper.so -lpng
 
 png_data.o:
 	gcc -c -fPIC $(WARN) png_data.c -o png_data.o 
