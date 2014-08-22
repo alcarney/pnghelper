@@ -24,3 +24,5 @@ pixel_iterator.o:
 
 clean:
 	rm *.o
+	cd io ; rm *.o
+	cd util ; rm *.o
