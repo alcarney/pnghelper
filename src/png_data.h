@@ -35,8 +35,14 @@ typedef struct pngimg
     png_bytep* row_pointers;
 } PNGImage;
 
+typedef struct imgparams
+{
+    unsigned int width;
+    unsigned int height;
+} IMGParams;
+
 // Function Prototypes
-PNGImage new_png_image();
+PNGImage new_png_image(IMGParams* params);
 bool is_empty_img_struct(PNGImage* img);
 bool is_img_writeable(PNGImage* img);
 void destroy_png_image(PNGImage* img);

@@ -5,13 +5,24 @@
  * a good idea to make use of stdarg.h and add a ... argument that allow us
  * to specify optional arguments such as image height and width etc.
  */
-PNGImage new_png_image()
+PNGImage new_png_image(IMGParams* params)
 {
     PNGImage img;
 
-    // I think we can just initialise everything to zero
-    img.width = 0;
-    img.height = 0;
+    // Check to see if we have been given any parameters if so use those
+    // otherwise just create a blank image
+    if (params != NULL)
+    {
+        img.width = params->width;
+        img.height = params->height;
+    }
+    else   
+    {
+        // I think we can just initialise everything to zero
+        img.width = 0;
+        img.height = 0;
+    }
+    
     img.color_type = 0;
     img.bit_depth = 0;
     img.number_of_passes = 0;
