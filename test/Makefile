@@ -17,6 +17,9 @@ test_pixel_iterator: $(DATA_OBJ) $(IO_OBJ) $(UTIL_OBJ)
 test_lib: 
 	gcc $(WARN) $(HEADERS) $(LIBS) test_lib.c -o test_lib -lpng -lpnghelper
 
+test_params:
+	gcc $(WARN) $(HEADERS) $(LIBS) test_params.c -o test_params -lpng -lpnghelper 
+
 png_data.o: 
 	gcc -c $(WARN) ../src/png_data.c -o ../src/png_data.o
 
