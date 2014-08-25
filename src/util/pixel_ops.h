@@ -24,5 +24,6 @@ typedef void (*PixelIterator) (Pixel);
  * and apply the PixelIterator to it.
  */
 void png_pixel_iterate(PNGImage* img, PixelIterator iter);
+bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighbours, int* num_neighbours);
 
 #endif
