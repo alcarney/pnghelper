@@ -4,8 +4,8 @@
  * the code required to loop through each pixel in an image
  */
 
-#ifndef PIXEL_ITERATOR_C
-#define PIXEL_ITERATOR_C
+#ifndef PIXEL_OPS_C
+#define PIXEL_OPS_C
 
 #include <stdlib.h>
 #include <stdio.h>

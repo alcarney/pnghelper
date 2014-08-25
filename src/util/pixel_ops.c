@@ -1,5 +1,12 @@
-#include "pixel_iterator.h"
+#include "pixel_ops.h"
 
+/*
+ * This function loops over every pixel in the image and calls the given 
+ * fuction passing each pixel as an argument.
+ *
+ * TODO: Add a void pointer argument to allow these PixelIterators to give
+ * them selves arguments
+ */
 void png_pixel_iterate(PNGImage* img, PixelIterator iter)
 {
     // We need a check to confirm if we have a valid image
@@ -18,7 +25,7 @@ void png_pixel_iterate(PNGImage* img, PixelIterator iter)
             for(x = 0; x < img->width; x++)
             {
                 // Process the pixel
-                iter(&(row[x*4]));
+                iter(&(row[x * img->num_color_channels]));
             }
         }
     }

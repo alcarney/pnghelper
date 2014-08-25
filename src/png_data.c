@@ -16,30 +16,15 @@ bool new_png_image(PNGImage* img, IMGParams* params)
         img->color_type = params->color_type;
         img->bit_depth = 8; // We will only be able to create 8bit images for now
 
-        int num_channels = 0;
+        int num_channels = get_num_channels(img);
 
-        // Choose the number of channels the image will require
-        switch(img->color_type)
+        if(num_channels == -1)
         {
-            // This only has one channel 
-            case PNG_COLOR_TYPE_GRAY:
-                num_channels = 1;       
-                break;
-
-            // Three channels
-            case PNG_COLOR_TYPE_RGB:
-                num_channels = 3;
-                break;
-
-            // Four channels
-            case PNG_COLOR_TYPE_RGB_ALPHA:
-                num_channels = 4;
-                break;
-
-            default:
-                fprintf(stderr, "[new_image]: ERROR: Invalid colour type or color type unsupported\n");
-                return false;
+            fprintf(stderr, "[new_image]: Colour type not supported or invalid\n");
+            return false;
         }
+
+        img->num_channels = num_channels;
 
         // Now allocate the memory
         img->row_pointers = (png_bytep*) malloc(img->height * sizeof(png_bytep));
@@ -54,7 +39,7 @@ bool new_png_image(PNGImage* img, IMGParams* params)
         unsigned int j = 0;
         for(i = 0; i < img->width ; i++)
         {
-            img->row_pointers[i] = (png_byte*) malloc((img->width * num_channels) * sizeof(png_byte));
+            img->row_pointers[i] = (png_byte*) malloc((img->width * img->num_channels) * sizeof(png_byte));
 
             if(!img->row_pointers[i])
             {
@@ -76,6 +61,7 @@ bool new_png_image(PNGImage* img, IMGParams* params)
         img->width = 0;
         img->height = 0;
         img->color_type = 0;
+        img->num_channels = 0;
         img->bit_depth = 0;
         img->row_pointers = NULL;
     }
@@ -151,4 +137,30 @@ bool is_img_writeable(PNGImage* img)
 
     // If we get this far then indeed we have an empty image struct so return true
     return true;
+}
+
+/*
+ * Get the number of colour channels based on the images colour type, reuturns the number
+ * of channels on success otherwise returns -1 on error
+ */
+int get_num_channels(PNGImage* img)
+{
+        // Choose the number of channels the image will require
+        switch(img->color_type)
+        {
+            // This only has one channel 
+            case PNG_COLOR_TYPE_GRAY:
+                return 1;
+
+            // Three channels
+            case PNG_COLOR_TYPE_RGB:
+                return 3;
+
+            // Four channels
+            case PNG_COLOR_TYPE_RGB_ALPHA:
+                return 4;
+
+            default:
+                return -1;
+        }
 }

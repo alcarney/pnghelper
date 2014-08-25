@@ -29,6 +29,7 @@ typedef struct pngimg
 {
     unsigned int width;
     unsigned int height;
+    unsigned int num_channels;
     png_byte color_type;
     png_byte bit_depth;
 
@@ -51,6 +52,9 @@ typedef struct imgparams
 bool new_png_image(PNGImage* img, IMGParams* params);
 bool is_empty_img_struct(PNGImage* img);
 bool is_img_writeable(PNGImage* img);
+
+int get_num_channels(PNGImage* img);
+
 void destroy_png_image(PNGImage* img);
 
 #endif
