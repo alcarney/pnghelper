@@ -127,7 +127,7 @@ bool is_empty_img_struct(PNGImage* img)
  */
 bool is_img_writeable(PNGImage* img)
 {
-    // Baiscally check every field, if it isn't NULL 
+    // Baiscally check every field, if it is NULL 
     // for pointers or 0 for the numeric fields then return false
     if (img->row_pointers == NULL)
         return false;
