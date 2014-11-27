@@ -1,19 +1,19 @@
 #include "pixel_ops.h"
-
+/*
 // Private Data Structures
-enum 
+e;wqnum 
 
 // Private Static Function Prototypes
 static int get_neighbour_case_type(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
-
+*/
 /*
- * This function loops over every pixel in the image and calls the given 
+ * This function loops over every pixel in the image and calls the given
  * fuction passing each pixel as an argument.
  *
  * TODO: Add a void pointer argument to allow these PixelIterators to give
  * them selves arguments
  */
-void png_pixel_iterate(PNGImage* img, PixelIterator iter)
+void png_pixel_iterate(PNGImage* img, PixelIterator iter, void* params)
 {
     // We need a check to confirm if we have a valid image
     // If we don't then just print a warning message that nothing was done
@@ -27,11 +27,11 @@ void png_pixel_iterate(PNGImage* img, PixelIterator iter)
         {
             // Get a pointer to the current row
             png_byte* row = img->row_pointers[y];
-            
+
             for(x = 0; x < img->width; x++)
             {
                 // Process the pixel
-                iter(&(row[x * img->num_channels]));
+                iter(&(row[x * img->num_channels]), x, y, params);
             }
         }
     }
@@ -47,10 +47,10 @@ void png_pixel_iterate(PNGImage* img, PixelIterator iter)
  * TODO: This current implementation means that the relative position of the returned pixels
  * are lost in some cases it may be useful to have this data so improve this to give the option
  * to preserve this data
- */
+ *
 bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighbours, int* num_neighbours)
 {
-    /*
+    *
      * So as breifly mentioned above the purpose of this function is to return 
      * an array of pixels that are 'neighbours' for the given pixel coordinates.
      * The most common case would be a pixel that is 'in the middle' of an image,
@@ -79,11 +79,11 @@ bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighb
      *  So as you can see we cannot blindly apply the obvious method for the original case 
      *  otherwise we will be returning pixels that are no where near the actual pixel at best
      *  and at worst accessing memory we have no right to and causing all sorts of problems, so
-     */
+     /
     
-    /*
+    *
      * So let's start with a few sainty checks
-     */
+     *
 
     // Check that the image is valid
     if(!is_img_writeable(img))
@@ -99,10 +99,10 @@ bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighb
         return false;
     }
 
-    /*
+    *
      * Now we need to determine what case we are dealing with so let's use a helper 
      * function and a switch statement
-     */
+     /
     switch(get_neighbour_case_type(x, y, img->width, img->height))
     {
         default:
@@ -110,4 +110,4 @@ bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighb
             return false;
     }
 
-}
+}*/
