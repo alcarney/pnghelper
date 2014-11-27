@@ -7,10 +7,10 @@ DATA_OBJ=png_data.o
 IO_OBJ=io/png_reader.o io/png_writer.o
 UTIL_OBJ=util/pixel_iterator.o
 
-ALL_OBJ = png_data.o png_writer.o png_reader.o pixel_ops.o
+ALL_OBJ = png_data.o png_writer.o png_reader.o
 
 library: $(ALL_OBJ)
-	gcc -shared $(WARN) $(DATA_OBJ) $(IO_OBJ) $(UTIL_OBJ) -o libpnghelper.so -lpng
+	gcc -shared $(WARN) $(DATA_OBJ) $(IO_OBJ) -o libpnghelper.so -lpng
 
 png_data.o:
 	gcc -c -fPIC $(WARN) -o png_data.o png_data.c
