@@ -1,5 +1,5 @@
 WARN= -Wall -Wextra -Werror
-HEAD_PATH=-I/home/alex/.myheaders
+HEAD_PATH=/home/alex/.myheaders
 LIB_PATH=/home/alex/.mylibs
 .PHONY: clean install
 
