@@ -30,7 +30,7 @@ PixelLocation get_pixel_location(unsigned int x, unsigned int y, unsigned int wi
             return TOP_LEFT_CORNER;
 
         // Or are we in the right corner?
-        if (x == width)
+        if (x == (width - 1))
             return TOP_RIGHT_CORNER;
 
         // No then we must be on the top edge
@@ -38,14 +38,14 @@ PixelLocation get_pixel_location(unsigned int x, unsigned int y, unsigned int wi
     }
 
     // If y is equal to the height then we must be at the bottom of the image
-    if (y == height)
+    if (y == (height - 1))
     {
         // But are we in the left corner?
         if (x == 0)
             return BOTTOM_LEFT_CORNER;
 
         // Or are we in the right hand corner
-        if (x == width)
+        if (x == (width - 1))
             return BOTTOM_RIGHT_CORNER;
 
         // No then we must be on the bottom edge
@@ -57,7 +57,7 @@ PixelLocation get_pixel_location(unsigned int x, unsigned int y, unsigned int wi
     if (x == 0)
         return LEFT_EDGE;
 
-    if (x == width)
+    if (x == (width - 1))
         return RIGHT_EDGE;
 
     // If we get this far then we must be in a middle case
@@ -106,9 +106,9 @@ void png_pixel_iterate(PNGImage* img, PixelIterator iter, void* params)
  * are lost in some cases it may be useful to have this data so improve this to give the option
  * to preserve this data
  */
-bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighbours, int* num_neighbours)
+/*bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighbours, int* num_neighbours)
 {
-    /*
+    *
      * So as breifly mentioned above the purpose of this function is to return
      * an array of pixels that are 'neighbours' for the given pixel coordinates.
      * The most common case would be a pixel that is 'in the middle' of an image,
@@ -137,11 +137,11 @@ bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighb
      *  So as you can see we cannot blindly apply the obvious method for the original case 
      *  otherwise we will be returning pixels that are no where near the actual pixel at best
      *  and at worst accessing memory we have no right to and causing all sorts of problems, so
-     */
+     *
 
-    /*
+    *
      * So let's start with a few sainty checks
-     */
+     *
 
     // Check that the image is valid
     if(!is_img_writeable(img))
@@ -157,10 +157,10 @@ bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighb
         return false;
     }
 
-    /*
+    *
      * Now we need to determine what case we are dealing with so let's use a helper
      * function and a switch statement
-     */
+     *
     switch(get_pixel_location(x, y, img->width, img->height))
     {
         default:
@@ -168,4 +168,4 @@ bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighb
             return false;
     }
 
-}
+}*/

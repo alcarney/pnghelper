@@ -34,6 +34,6 @@ typedef void (*PixelIterator) (Pixel, unsigned int, unsigned int, void*);
 
 void png_pixel_iterate(PNGImage* img, PixelIterator iter, void* params);
 PixelLocation get_pixel_location(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
-bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighbours, int* num_neighbours);
+//bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighbours, int* num_neighbours);
 
 #endif
