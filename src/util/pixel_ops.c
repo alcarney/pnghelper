@@ -3,10 +3,66 @@
 // Private Data Structures
 
 // Private Static Function Prototypes
-static int get_neighbour_case_type(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
 
 // Private static functions
 
+/*
+ * Given an coordinate, and the image dimensions this function determines where on the image the pixel is
+ * so that we can then handle it appropriately in get_neighbours
+ *
+ * Arguments:
+ *              x: Pixel's x coordinate
+ *              y: Pixel's y coordinate
+ *              width: The width of the image
+ *              height: The height of the image
+ */
+PixelLocation get_pixel_location(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
+{
+    // Quick check to make sure that the point (x,y) is actually within the image
+    if(x > width || y > height)
+        return INVALID_LOCATION;
+
+    // If y is zero then we are on the top edge...
+    if (y == 0)
+    {
+        // But are we in the left corner?
+        if (x == 0)
+            return TOP_LEFT_CORNER;
+
+        // Or are we in the right corner?
+        if (x == width)
+            return TOP_RIGHT_CORNER;
+
+        // No then we must be on the top edge
+        return TOP_EDGE;
+    }
+
+    // If y is equal to the height then we must be at the bottom of the image
+    if (y == height)
+    {
+        // But are we in the left corner?
+        if (x == 0)
+            return BOTTOM_LEFT_CORNER;
+
+        // Or are we in the right hand corner
+        if (x == width)
+            return BOTTOM_RIGHT_CORNER;
+
+        // No then we must be on the bottom edge
+        return BOTTOM_EDGE;
+    }
+
+    // If we get this far then the y coordinate is not on the edge of the image so now we only
+    // need to check if x in an extremity of the image
+    if (x == 0)
+        return LEFT_EDGE;
+
+    if (x == width)
+        return RIGHT_EDGE;
+
+    // If we get this far then we must be in a middle case
+    return MIDDLE;
+}
 
 /*
  * This function loops over every pixel in the image and calls the given
@@ -62,7 +118,7 @@ bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighb
      *                  x, o, x
      *                  x, x, x
      *
-     *  Where 'o' is the given pixel and 'x' represents a neighbour. 
+     *  Where 'o' is the given pixel and 'x' represents a neighbour
      *
      *  However there are a number of ... edge cases to consider - see what I did there? ;)
      *  Such as:
@@ -105,7 +161,7 @@ bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighb
      * Now we need to determine what case we are dealing with so let's use a helper
      * function and a switch statement
      */
-    switch(get_neighbour_case_type(x, y, img->width, img->height))
+    switch(get_pixel_location(x, y, img->width, img->height))
     {
         default:
             fprintf(stderr, "[get_neighbours]: ERROR: Unable to determine case type\n");

@@ -13,17 +13,27 @@
 #include "../png_data.h"
 
 // Data Structures
+typedef enum pixel_loc
+{
+    MIDDLE,
+    TOP_EDGE,
+    BOTTOM_EDGE,
+    LEFT_EDGE,
+    RIGHT_EDGE,
+    TOP_LEFT_CORNER,
+    TOP_RIGHT_CORNER,
+    BOTTOM_LEFT_CORNER,
+    BOTTOM_RIGHT_CORNER,
+    INVALID_LOCATION
+} PixelLocation;
+
 typedef png_byte* Pixel;
 typedef void (*PixelIterator) (Pixel, unsigned int, unsigned int, void*);
 
 // Function Prototypes
 
-/*
- * Given an image and a function pointer to a pixel iterator type
- * function this will automatically loop through each pixel in an image
- * and apply the PixelIterator to it.
- */
 void png_pixel_iterate(PNGImage* img, PixelIterator iter, void* params);
-//bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighbours, int* num_neighbours);
+PixelLocation get_pixel_location(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
+bool get_neighbours(PNGImage* img, unsigned int x, unsigned int y, Pixel* neighbours, int* num_neighbours);
 
 #endif
